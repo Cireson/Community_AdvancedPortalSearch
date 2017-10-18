@@ -1,6 +1,6 @@
 # Service Manager Portal Searches
 
-
+![Searches](/_images/Searches.png?raw=true "Advanced Searches")
 
 ## Features
 
