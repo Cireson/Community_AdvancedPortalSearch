@@ -1,13 +1,13 @@
-# Service Manager Portal Searches
+# Service Manager Portal Advanced Searches
 
 ![Searches](/_images/Searches.PNG?raw=true "Advanced Searches")
 
 ## Features
 
-- Add Hardware Asset, Software Asset and User searches to the portal
+- Adds Hardware Asset, Software Asset and User searches to the portal
 - Results appear as you type **Don't press Enter**
 - Click the result to open the item in a new tab
-- Asset Managers will always have their search box default to Hardware Search
+- Asset Managers will always have their search box default to Hardware Asset Search
 
 
 ## Installation
