@@ -22,5 +22,7 @@
 ## Further help
 
 Please log issues on GitHub
+
 Pull requests are welcome
+
 The extention has a thread on the [Cireson Community](https://community.cireson.com/discussion/3222/advanced-searches-for-cireson-service-manager-portal/ "Cireson Community Page").
