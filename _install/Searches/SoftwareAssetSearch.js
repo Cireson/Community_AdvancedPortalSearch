@@ -7,11 +7,17 @@
 
 var customSearchSoftwareAsset
 
+if (typeof customSearchLib == "undefined") {
+	app.events.subscribe('customSearchLibCreated',function () {
+		loadSoftwareSearch ()
+	}); 
+}
+else {
+	loadSoftwareSearch ();
+}
+
 function loadSoftwareSearch() {
-    if (typeof customSearchLib == 'undefined') {
-        setTimeout(loadSoftwareSearch, 100);//wait 100 millisecnds then recheck
-        return;
-	}
+
 	customSearchSoftwareAsset = {
 
 		// Init code of search box 
@@ -33,7 +39,6 @@ function loadSoftwareSearch() {
 			var term = 	options.filter.filters[0].value;
 			var strJsonCriteria = "&queryId=a9536080-a014-dc44-4a8b-96bfbfdda151&searchterm=%27%25" + term + "%25%27";
 			return strJsonCriteria;
-					
 		},
 
 		onSelect: function (event,dataItem) {
@@ -42,9 +47,6 @@ function loadSoftwareSearch() {
 			var url = '/AssetManagement/SoftwareAsset/Edit/' + dataItem.Id;
 			var newWindow = window.open(url, '_blank');
 			newWindow.focus();
-
 		}
 	};
 }
-
-loadSoftwareSearch()

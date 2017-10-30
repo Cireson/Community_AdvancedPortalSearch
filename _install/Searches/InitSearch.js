@@ -65,18 +65,18 @@ $(document).ready(function () {
 				break;
 		}
 	});
-
-	init(searchInput);
-
+	
+	if (typeof customSearchHardwareAsset == "undefined") {
+		app.events.subscribe('customSearchHardwareAssetCreated',function () {
+			init(searchInput)
+		}); 
+	}
+	else {
+		init (searchInput);
+	}
+	
 	function init (searchInput) {
-
-		if (typeof customSearchHardwareAsset == 'undefined') {
-			setTimeout(init(searchInput), 100);//wait 100 millisecnds then recheck
-			return;
-		}
-		
 		if (session.user.AssetManager === 1) {
-
 			customSearchHardwareAsset.initSearch(searchInput);						
 			// set Hardware Asset search as default if user is hardware asset manager
 			var currentURL = window.location.href;

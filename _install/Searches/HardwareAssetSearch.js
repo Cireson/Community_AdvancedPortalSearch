@@ -7,11 +7,17 @@
 
 var customSearchHardwareAsset
 
+if (typeof customSearchLib == "undefined") {
+	app.events.subscribe('customSearchLibCreated',function () {
+		loadHardwareSearch ()
+	}); 
+}
+else {
+	loadHardwareSearch ();
+}
+
 function loadHardwareSearch() {
-    if (typeof customSearchLib == 'undefined') {
-        setTimeout(loadHardwareSearch, 100);//wait 100 millisecnds then recheck
-        return;
-    }
+
 	customSearchHardwareAsset = {
 
 		// Init code of search box 
@@ -33,7 +39,6 @@ function loadHardwareSearch() {
 			var term = 	options.filter.filters[0].value;
 			var strJsonCriteria = "&queryId=ce6aa11b-286d-eee1-e308-495dcd912095&searchterm=%27%25" + term + "%25%27";
 			return strJsonCriteria;
-					
 		},
 		
 		onSelect: function (event,dataItem) {
@@ -42,9 +47,7 @@ function loadHardwareSearch() {
 			var url = '/AssetManagement/HardwareAsset/Edit/' + dataItem.Id;
 			var newWindow = window.open(url, '_blank');
 			newWindow.focus();
-
 		}
-	};	
+	};
+	app.events.publish('customSearchHardwareAssetCreated');
 }
-
-loadHardwareSearch();

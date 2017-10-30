@@ -7,11 +7,17 @@
 
 var customSearchUser 
 
+if (typeof customSearchLib == "undefined") {
+	app.events.subscribe('customSearchLibCreated',function () {
+		loadUserSearch ()
+	}); 
+}
+else {
+	loadUserSearch ();
+}
+
 function loadUserSearch() {
-    if (typeof customSearchLib == 'undefined') {
-        setTimeout(loadUserSearch, 100);//wait 100 millisecnds then recheck
-		return;
-	}
+
 	customSearchUser = {
 
 		// Init code of search box 
@@ -33,7 +39,6 @@ function loadUserSearch() {
 			var term = 	options.filter.filters[0].value;
 			var strJsonCriteria = "&queryId=46418f86-376e-3690-2d25-befdbb2aa78e&searchterm=%27%25" + term + "%25%27";
 			return strJsonCriteria;
-					
 		},
 		
 		onSelect: function (event,dataItem) {
@@ -42,9 +47,6 @@ function loadUserSearch() {
 			var url = '/user/UserRelatedInfoById/' + dataItem.Id;
 			var newWindow = window.open(url, '_blank');
 			newWindow.focus();
-
 		}
 	};
 }
-
-loadUserSearch();
