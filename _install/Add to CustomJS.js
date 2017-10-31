@@ -3,15 +3,15 @@
 /* ----------------------------------------------- */
 
 //Load Search Common Functions (lib)
-loadScript("/CustomSpace/Searches/custom_SearchLib.js",['']);
+loadScript("/CustomSpace/Searches/SearchLib.js",['']);
 
 // Load Search Extensions
-loadScript("/CustomSpace/Searches/custom_SoftwareAssetSearch.js",['']);
-loadScript("/CustomSpace/Searches/custom_HardwareAssetSearch.js",['']);
-loadScript("/CustomSpace/Searches/custom_UserSearch.js",['']);
+loadScript("/CustomSpace/Searches/SoftwareAssetSearch.js",['']);
+loadScript("/CustomSpace/Searches/HardwareAssetSearch.js",['']);
+loadScript("/CustomSpace/Searches/UserSearch.js",['']);
 
 // Initialize Advanced Portal Search code
-loadScript("/CustomSpace/Searches/custom_InitSearch.js",['']);
+loadScript("/CustomSpace/Searches/InitSearch.js",['']);
 		
 /* ----------------------------------------------- */
 /* ---------END Avanced Portal Search App -------- */
