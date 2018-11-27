@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 
 	//Add Custom toggle event handling
-	$(".dropdown-menu").on("click", "li", function(event) {
+	$(".dropdown-menu").on("click", "li", function (event) {
 
 		var searchType = event.target.id;
 		//console.log(event);
@@ -33,58 +33,72 @@ $(document).ready(function () {
 			customSearchLib.disableCustomHeaderSearch(searchInput);
 		}
 
+		function disableSearchKeys() {
+			$("span.navbar__search--btn").hide();
+			$("input[name=searchText]").unbind("keypress");
+		}
+
 		switch (searchType) {
 			case "SoftwareAssetSearchType":
-				customSearchSoftwareAsset.initSearch(searchInput);	
+				customSearchSoftwareAsset.initSearch(searchInput);
 				// Update Search Param and Concept
 				var currentURL = window.location.href;
 				var searchParam = $("input[name=search_param]"); //the hidden field which holds the search type id
 				var searchConcept = $("span[id=search_concept]"); //the span field which displays the search type value      
 				searchParam.val("SoftwareAsset");
-				searchConcept.html('Software Asset');    	
-				break;	
-			case "HardwareAssetSearchType":					
-				customSearchHardwareAsset.initSearch(searchInput);							
+				searchConcept.html('Software Asset');
+				disableSearchKeys();
+				break;
+			case "HardwareAssetSearchType":
+				customSearchHardwareAsset.initSearch(searchInput);
 				// Update Search Param and Concept
 				var currentURL = window.location.href;
 				var searchParam = $("input[name=search_param]"); //the hidden field which holds the search type id
 				var searchConcept = $("span[id=search_concept]"); //the span field which displays the search type value      
 				searchParam.val("HardwareAsset");
-				searchConcept.html('Hardware Asset');     
-				break;	
+				searchConcept.html('Hardware Asset');
+				disableSearchKeys();
+				break;
 			case "UserSearchType":
-				customSearchUser.initSearch(searchInput);							
+				customSearchUser.initSearch(searchInput);
 				// Update Search Param and Concept
 				var currentURL = window.location.href;
 				var searchParam = $("input[name=search_param]"); //the hidden field which holds the search type id
 				var searchConcept = $("span[id=search_concept]"); //the span field which displays the search type value      
 				searchParam.val("User");
-				searchConcept.html('User');     
-				break;	
+				searchConcept.html('User');
+				disableSearchKeys();
+				break;
 			default:
+				$("span.navbar__search--btn").show();
+				$("input[name=searchText]").keypress(function (event) {
+					if (event.keyCode == 13) {
+						app.headerSearchWorkItem();
+					}
+				});
 				break;
 		}
 	});
-	
+
 	if (typeof customSearchHardwareAsset == "undefined") {
-		app.events.subscribe('customSearchHardwareAssetCreated',function () {
+		app.events.subscribe('customSearchHardwareAssetCreated', function () {
 			init(searchInput)
-		}); 
+		});
 	}
 	else {
-		init (searchInput);
+		init(searchInput);
 	}
-	
-	function init (searchInput) {
+
+	function init(searchInput) {
 		if (session.user.AssetManager === 1) {
-			customSearchHardwareAsset.initSearch(searchInput);						
+			customSearchHardwareAsset.initSearch(searchInput);
 			// set Hardware Asset search as default if user is hardware asset manager
 			var currentURL = window.location.href;
 			var searchParam = $("input[name=search_param]"); //the hidden field which holds the search type id
 			var searchConcept = $("span[id=search_concept]"); //the span field which displays the search type value      
 			searchParam.val("HardwareAsset");
-			searchConcept.html('Hardware Asset');    
+			searchConcept.html('Hardware Asset');
 
 		}
-	};		
+	};
 });
