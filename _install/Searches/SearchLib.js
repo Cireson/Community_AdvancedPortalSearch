@@ -3,7 +3,7 @@
 /* ------------ Advanced Portal Search - Lib ------------ */
 /* ----------------------------------------------------- */
 // v8.1
-// Contributors: William Udovich, Joivan Hedrick, Geoff Ross, Stefan Henseler, Seth Coussens
+// Contributors: William Udovich, Joivan Hedrick, Geoff Ross, Stefan Henseler, Seth Coussens, Cory Bowe
 /* Description: Contains shared code for the advanced portal search */
 
 
@@ -36,12 +36,17 @@ var customSearchLib = {
 			filter: "contains",
 			placeholder: "Please enter a search term ...",
 			minLength: 3,
-			delay: 300,
+			delay: 600,
 			width: 600,
 			height: 800,
 			filtering: function (obj) {		
 				// show progress
-				 kendo.ui.progress($(".navbar__search--input"), true);
+				 if (!obj.filter.value) {
+					//prevent filtering if the filter does not value
+					obj.preventDefault();
+				  } else {
+					kendo.ui.progress($(".navbar__search--input"), true);
+				  }
 			},				
 			dataBound : function (obj) {
 				// hide progress
@@ -116,23 +121,6 @@ var customSearchLib = {
 
 		});
 
-		// Update Search if input box content changes
-		searchInput.on('keyup', function (e) {
-
-			var assetSearchText = searchInput.val(); //Get the value that the user typed in. 
-		
-			//If the autocomplete text is empty, then allow default OOB behavior. Otherwise, disable the OOB mouseout.
-			if (assetSearchText != "" && assetSearchText.length > 2) {
-				searchInput.data("kendoAutoComplete").search(assetSearchText);
-			};
-		});	
-
-		var assetSearchText = searchInput.val(); //Get the value that the user typed in. 
-
-		//force search if box is not empty and has at least a length of 3
-		if (assetSearchText != "" && assetSearchText.length > 2) {
-			searchInput.data("kendoAutoComplete").search(assetSearchText);
-		};
 	},
 
 	// Data Source Init code
